@@ -1,155 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fly With Me</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fly With Me</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap');
 
-    html, body {
-      scroll-behavior: smooth;
-      font-family: 'Roboto', sans-serif;
-      color: lightblue;
-      overflow-x: hidden;
-    }
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+    scroll-behavior: smooth;
+    font-family: 'Roboto', sans-serif;
+  }
+  body {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+  }
 
-    section {
-      width: 100vw;
-      height: 100vh;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      transition: filter 1s ease-in-out;
-    }
+  section {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    scroll-snap-align: start;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #a3d2ca; /* light blue */
+  }
 
-    .blurred {
-      filter: blur(4px);
-    }
+  /* Background container with separate image and blur */
+  .bg-container {
+    position: absolute;
+    top:0; left:0; right:0; bottom:0;
+    background-size: cover;
+    background-position: center;
+    filter: none;
+    transition: filter 1s ease;
+    z-index: -2;
+  }
+  .bg-blur {
+    filter: blur(6px);
+  }
 
-    .title {
-      font-family: 'Pacifico', cursive;
-      font-size: 4rem;
-      animation: slideIn 2s ease forwards;
-    }
+  /* Overlay layer to dim background for better text visibility */
+  .overlay {
+    position: absolute;
+    top:0; left:0; right:0; bottom:0;
+    background-color: rgba(0,0,0,0.35);
+    z-index: -1;
+  }
 
-    .profile {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      animation: slideIn 2s ease forwards;
-    }
+  /* PAGE 1 styles */
+  #page1 {
+    flex-direction: column;
+  }
+  #page1 h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 7vw;
+    color: #9ad3bc; /* light medium green-blue */
+    margin-bottom: 2rem;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 1s ease, opacity 1s ease;
+  }
+  #page1 h1.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  #page1 img {
+    width: 40vw;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 1s ease 0.3s, opacity 1s ease 0.3s;
+  }
+  #page1 img.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
 
-    .bio-text {
-      font-size: 1.2rem;
-      width: 60%;
-      text-align: center;
-      animation: slideIn 2s ease forwards;
-    }
+  /* PAGE 2 styles */
+  #page2 {
+    padding: 2rem;
+    font-size: 1.3rem;
+    text-align: center;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: transform 1s ease, opacity 1s ease;
+  }
+  #page2.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    .contact-section img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 1rem;
-    }
+  /* PAGE 4 styles */
+  #page4 {
+    flex-direction: column;
+  }
+  #page4 img {
+    width: 80px;
+    margin-bottom: 1rem;
+  }
+  #page4 p {
+    font-size: 1.3rem;
+    color: #9ad3bc;
+  }
 
-    .contact-section p {
-      font-size: 1.5rem;
-    }
-
-    @keyframes slideIn {
-      0% {
-        transform: translateY(100%);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .fade-in {
-      animation: fadeIn 1s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    .loader {
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      background: #000;
-      color: white;
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-  </style>
+</style>
 </head>
-
 <body>
-  <div class="loader" id="loader">Loading...</div>
 
-  <!-- Page 1: Title Page -->
-  <section id="page1" style="background-image: url('images/background1.png');">
-    <h1 class="title" style="margin-bottom: 2rem;">Fly With Me</h1>
-    <img src="images/profile.jpg" alt="Profile Photo" class="profile" />
-  </section>
+<!-- PAGE 1 -->
+<section id="page1">
+  <div class="bg-container" id="bg1" style="background-image: url('images/background1.png');"></div>
+  <div class="overlay"></div>
+  <h1>Fly With Me</h1>
+  <img src="images/profile.jpg" alt="Profile Photo" />
+</section>
 
-  <!-- Page 2: Bio -->
-  <section id="page2" style="background-image: url('images/background2.png');">
-    <p class="bio-text">
-      Hi! I'm Swasti. I’ve spent the last few years flying through ideas, building aeromodels, snapping mountains, and
-      stirring things up for the environment. If it doesn't fly or float or glitch, I'm probably not interested.
-      I believe in creativity with purpose, and this site is a tiny window into all those tangents I’ve charted. Dive in,
-      explore the folders, and maybe drop a mail — or paper plane — my way.
-    </p>
-  </section>
+<!-- PAGE 2 -->
+<section id="page2">
+  <div class="bg-container" id="bg2" style="background-image: url('images/background2.png');"></div>
+  <div class="overlay"></div>
+  <p>
+    <!-- Replace with your 150-200 word bio -->
+    Hi, I am Swasti, an aerospace enthusiast and explorer. This site showcases my journey through flight, nature, and creativity. Join me as I share projects, photos, and stories inspired by the sky and beyond.
+  </p>
+</section>
 
-  <!-- Page 3: Folders Already Added Before -->
+<!-- PAGE 4 -->
+<section id="page4">
+  <div class="bg-container" id="bg4" style="background-image: url('images/background4.png');"></div>
+  <div class="overlay"></div>
+  <img src="images/logo7.png" alt="Email Icon" />
+  <p>swasti.desai.225@gmail.com</p>
+</section>
 
-  <!-- Page 4: Contact -->
-  <section id="page4" class="contact-section" style="background-image: url('images/background3.png');">
-    <img src="images/logo7.png" alt="Mail Emoji">
-    <p>swasti.desai.225@gmail.com</p>
-  </section>
+<script>
+  // Intersection Observer to trigger blur + animation when page visible
 
-  <script>
-    window.addEventListener("load", () => {
-      document.getElementById("loader").style.display = "none";
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.7  // 70% of section must be visible to activate
+  };
 
-      // Delay and blur sections after load
-      const sections = document.querySelectorAll("section");
-      sections.forEach((section, i) => {
+  function onIntersect(entries) {
+    entries.forEach(entry => {
+      const section = entry.target;
+      const bg = section.querySelector('.bg-container');
+      if(entry.isIntersecting) {
+        // Blur background after short delay
         setTimeout(() => {
-          section.classList.add("blurred");
-          const elements = section.querySelectorAll(".title, .profile, .bio-text, img, p");
-          elements.forEach(el => el.classList.add("fade-in"));
-        }, 800 + i * 300);
-      });
-    });
-  </script>
-</body>
+          bg.classList.add('bg-blur');
+        }, 500);
 
+        // Animate text/photo depending on page
+        if(section.id === 'page1') {
+          section.querySelector('h1').classList.add('visible');
+          section.querySelector('img').classList.add('visible');
+        } else if(section.id === 'page2') {
+          section.querySelector('p').classList.add('visible');
+        }
+      } else {
+        // Remove blur and animation when not visible
+        bg.classList.remove('bg-blur');
+        if(section.id === 'page1') {
+          section.querySelector('h1').classList.remove('visible');
+          section.querySelector('img').classList.remove('visible');
+        } else if(section.id === 'page2') {
+          section.querySelector('p').classList.remove('visible');
+        }
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver(onIntersect, options);
+  document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+  });
+</script>
+
+</body>
 </html>
