@@ -47,12 +47,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    text-align: center;
   }
   #page1-text {
     font-family: 'Pacifico', cursive;
-    font-size: 5vw;
-    text-align: center;
+    font-size: 7vw;
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 2s ease, transform 2s ease;
@@ -62,15 +61,13 @@
     transform: translateY(0);
   }
   #page1-profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-top: 20px;
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 2s ease, transform 2s ease;
   }
   #page1-profile.show img {
-    max-height: 50vh;
+    height: 20vh;
     border-radius: 50%;
     box-shadow: 0 0 20px 3px rgba(173,216,230,0.7);
   }
@@ -130,8 +127,8 @@
     align-items: center;
   }
   #page4-logo {
-    width: 60px;
-    height: 60px;
+    width: 120px;
+    height: 120px;
     margin-bottom: 10px;
   }
   #page4-email {
