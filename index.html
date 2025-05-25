@@ -1,92 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fly With Me</title>
-<style>
-  body {
-    font-family: 'Roboto', sans-serif;
-    background: url('images/background3.png') no-repeat center center fixed;
-    background-size: cover;
-    color: #add8e6; /* light blue */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  .folders-container {
-    width: 80%;
-    max-width: 1200px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    justify-items: center;
-    align-items: center;
-  }
-  .folder {
-    text-align: center;
-    cursor: pointer;
-  }
-  .folder img {
-    width: 150px;  /* Adjust size to fit well */
-    height: 150px;
-    object-fit: contain;
-    background: transparent;
-  }
-  .folder p {
-    margin-top: 0.5rem;
-    font-size: 1.1rem;
-  }
-  a {
-    color: #add8e6;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fly With Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      scroll-behavior: smooth;
+      font-family: 'Roboto', sans-serif;
+      color: lightblue;
+      overflow-x: hidden;
+    }
+
+    section {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: filter 1s ease-in-out;
+    }
+
+    .blurred {
+      filter: blur(4px);
+    }
+
+    .title {
+      font-family: 'Pacifico', cursive;
+      font-size: 4rem;
+      animation: slideIn 2s ease forwards;
+    }
+
+    .profile {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      animation: slideIn 2s ease forwards;
+    }
+
+    .bio-text {
+      font-size: 1.2rem;
+      width: 60%;
+      text-align: center;
+      animation: slideIn 2s ease forwards;
+    }
+
+    .contact-section img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1rem;
+    }
+
+    .contact-section p {
+      font-size: 1.5rem;
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .loader {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      color: white;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+  </style>
 </head>
+
 <body>
-  <div class="folders-container">
-    <div class="folder">
-      <a href="aeromodelling.html" target="_blank">
-        <img src="images/logo1.png" alt="Aeromodelling Projects" />
-        <p>Aeromodelling Projects</p>
-      </a>
-    </div>
-    <div class="folder">
-      <a href="environmental-projects.html" target="_blank">
-        <img src="images/logo2.png" alt="Environmental Projects" />
-        <p>Environmental Projects</p>
-      </a>
-    </div>
-    <div class="folder">
-      <a href="photography.html" target="_blank">
-        <img src="images/logo3.png" alt="Photography" />
-        <p>Photography</p>
-      </a>
-    </div>
-    <div class="folder">
-      <a href="research-articles.html" target="_blank">
-        <img src="images/logo4.png" alt="Research Articles" />
-        <p>Articles that didn't make Research Gate</p>
-      </a>
-    </div>
-    <div class="folder">
-      <a href="math-aint-mathing.html" target="_blank">
-        <img src="images/logo5.png" alt="Math Ain't Mathing" />
-        <p>Math Ain't Mathing</p>
-      </a>
-    </div>
-    <div class="folder">
-      <a href="other-fun-stuff.html" target="_blank">
-        <img src="images/logo6.png" alt="Other Fun Stuff" />
-        <p>Other Fun Stuff</p>
-      </a>
-    </div>
-  </div>
+  <div class="loader" id="loader">Loading...</div>
+
+  <!-- Page 1: Title Page -->
+  <section id="page1" style="background-image: url('images/background1.png');">
+    <h1 class="title" style="margin-bottom: 2rem;">Fly With Me</h1>
+    <img src="images/profile.jpg" alt="Profile Photo" class="profile" />
+  </section>
+
+  <!-- Page 2: Bio -->
+  <section id="page2" style="background-image: url('images/background2.png');">
+    <p class="bio-text">
+      Hi! I'm Swasti. I’ve spent the last few years flying through ideas, building aeromodels, snapping mountains, and
+      stirring things up for the environment. If it doesn't fly or float or glitch, I'm probably not interested.
+      I believe in creativity with purpose, and this site is a tiny window into all those tangents I’ve charted. Dive in,
+      explore the folders, and maybe drop a mail — or paper plane — my way.
+    </p>
+  </section>
+
+  <!-- Page 3: Folders Already Added Before -->
+
+  <!-- Page 4: Contact -->
+  <section id="page4" class="contact-section" style="background-image: url('images/background3.png');">
+    <img src="images/logo7.png" alt="Mail Emoji">
+    <p>swasti.desai.225@gmail.com</p>
+  </section>
+
+  <script>
+    window.addEventListener("load", () => {
+      document.getElementById("loader").style.display = "none";
+
+      // Delay and blur sections after load
+      const sections = document.querySelectorAll("section");
+      sections.forEach((section, i) => {
+        setTimeout(() => {
+          section.classList.add("blurred");
+          const elements = section.querySelectorAll(".title, .profile, .bio-text, img, p");
+          elements.forEach(el => el.classList.add("fade-in"));
+        }, 800 + i * 300);
+      });
+    });
+  </script>
 </body>
+
 </html>
