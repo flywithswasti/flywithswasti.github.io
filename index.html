@@ -127,12 +127,14 @@
   #page3-content {
     z-index: 2;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 30px;
-    padding: 50px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 40px;
+    padding: 60px;
     justify-items: center;
     align-items: center;
-    max-width: 1000px;
+    width: 100%;
+    height: 75vh;
     margin: auto;
     opacity: 0;
     transform: translateY(50px);
@@ -153,6 +155,16 @@
   }
   .folder:hover {
     transform: scale(1.1);
+  }
+  .folder-wrapper {
+    text-align: center;
+    color: lightblue;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+  }
+  .folder-wrapper span {
+    display: block;
+    margin-top: 10px;
   }
 
   #page4 {
@@ -201,12 +213,30 @@
 <section id="page3" class="page">
   <div id="page3-bg"></div>
   <div id="page3-content">
-    <a href="aeromodelling.html"><img src="images/logo1.png" alt="Aeromodelling" class="folder" /></a>
-    <a href="environmental-projects.html"><img src="images/logo2.png" alt="Environmental Projects" class="folder" /></a>
-    <a href="photography.html"><img src="images/logo3.png" alt="Math Ain't Mathing" class="folder" /></a>
-    <a href="research-articles.html"><img src="images/logo4.png" alt="Other Fun Stuff" class="folder" /></a>
-    <a href=""math-aint-mathing.html"><img src="images/logo5.png" alt="Photography" class="folder" /></a>
-    <a href="other-fun-stuff.html"><img src="images/logo6.png" alt="Research Articles" class="folder" /></a>
+    <div class="folder-wrapper">
+      <a href="aeromodelling.html"><img src="images/logo1.png" alt="Aeromodelling" class="folder" /></a>
+      <span>Aeromodelling</span>
+    </div>
+    <div class="folder-wrapper">
+      <a href="environmental-projects.html"><img src="images/logo2.png" alt="Environmental Projects" class="folder" /></a>
+      <span>Environmental Projects</span>
+    </div>
+    <div class="folder-wrapper">
+      <a href="photography.html"><img src="images/logo3.png" alt="Photography" class="folder" /></a>
+      <span>Photography</span>
+    </div>
+    <div class="folder-wrapper">
+      <a href="research-articles.html"><img src="images/logo4.png" alt="Research Articles" class="folder" /></a>
+      <span>Research Articles</span>
+    </div>
+    <div class="folder-wrapper">
+      <a href="math-aint-mathing.html"><img src="images/logo5.png" alt="Math Ain't Mathing" class="folder" /></a>
+      <span>Math Ain't Mathing</span>
+    </div>
+    <div class="folder-wrapper">
+      <a href="other-fun-stuff.html"><img src="images/logo6.png" alt="Other Fun Stuff" class="folder" /></a>
+      <span>Other Fun Stuff</span>
+    </div>
   </div>
 </section>
 
