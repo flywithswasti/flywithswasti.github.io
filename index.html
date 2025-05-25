@@ -41,7 +41,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* Add a filter property to animate blur */
     filter: none;
     transition: filter 2s ease;
   }
@@ -260,9 +259,8 @@
   let isAnimating = false;
 
   function animatePage1() {
-    // Normal animation on initial load or going forward to Page 1
     const page1 = pages[0];
-    page1.style.filter = 'none';  // Crisp background
+    page1.style.filter = 'none';
     const text = document.getElementById('page1-text');
     const profile = document.getElementById('page1-profile');
     text.classList.add('show');
@@ -270,36 +268,25 @@
   }
 
   function animatePage1Back() {
-    // Scroll back animation from Page 2 to Page 1:
-    // Show crisp background -> blur it -> then show text & profile roll in
-    
     const page1 = pages[0];
     const text = document.getElementById('page1-text');
     const profile = document.getElementById('page1-profile');
-
-    // Reset states:
     text.classList.remove('show');
     profile.classList.remove('show');
-    page1.style.filter = 'none';  // start crisp
-
-    // Show the page first, no blur
+    page1.style.filter = 'none';
     page1.classList.add('active');
 
-    // Step 1: show crisp background for 400ms
     setTimeout(() => {
-      // Step 2: blur background over 2 seconds
       page1.style.transition = 'filter 2s ease';
       page1.style.filter = 'blur(4px)';
     }, 400);
 
-    // Step 3: after blur finished (2s), show text and profile and remove blur
     setTimeout(() => {
-      page1.style.filter = 'none'; // remove blur to show crisp background behind text
+      page1.style.filter = 'none';
       text.classList.add('show');
       profile.classList.add('show');
-    }, 2400); // 400 + 2000 ms
+    }, 2400);
 
-    // Unlock animation after total 3 seconds
     setTimeout(() => {
       isAnimating = false;
     }, 3000);
@@ -325,19 +312,10 @@
     pages.forEach((p) => {
       p.classList.remove('active', 'show-blur', 'show-bio', 'show-content');
       if (p.id === 'page1') {
-        // Reset blur and transitions on Page 1
         p.style.filter = 'none';
         p.style.transition = 'filter 2s ease';
         document.getElementById('page1-text').classList.remove('show');
         document.getElementById('page1-profile').classList.remove('show');
-      }
-      if (p.id === 'page2') {
-        p.style.filter = 'none';
-        p.style.transition = 'filter 2s ease';
-      }
-      if (p.id === 'page3') {
-        p.style.filter = 'none';
-        p.style.transition = 'filter 2s ease';
       }
     });
   }
@@ -348,23 +326,16 @@
     hideAllPages();
 
     if (index === 0) {
-      // Going to Page 1
-
-      // If coming BACK from Page 2 (scrolling backwards)
       if (currentPage === 1) {
-        // Show page immediately, then do special back animation
         pages[0].classList.add('active');
         animatePage1Back();
       } else {
-        // Normal show page 1 animation
         pages[0].classList.add('active');
-        // Delay for smooth transition
         setTimeout(() => {
           animatePage1();
           isAnimating = false;
         }, 100);
       }
-
     } else if (index === 1) {
       pages[1].classList.add('active');
       animatePage2();
@@ -375,29 +346,25 @@
       setTimeout(() => { isAnimating = false; }, 2500);
     } else if (index === 3) {
       pages[3].classList.add('active');
-      isAnimating = false;
+      setTimeout(() => { isAnimating = false; }, 1000); // <-- fix added here
     }
 
     currentPage = index;
   }
 
-  // Scroll event to navigate between pages
   window.addEventListener('wheel', (e) => {
     if (isAnimating) return;
     if (e.deltaY > 0) {
-      // scroll down
       if (currentPage < pages.length - 1) {
         showPage(currentPage + 1);
       }
     } else {
-      // scroll up
       if (currentPage > 0) {
         showPage(currentPage - 1);
       }
     }
   });
 
-  // Initial animation on page load
   window.onload = () => {
     animatePage1();
   };
