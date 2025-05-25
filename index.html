@@ -51,7 +51,7 @@
   }
   #page1-text {
     font-family: 'Pacifico', cursive;
-    font-size: 7vw;
+    font-size: 8vw;
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 2s ease, transform 2s ease;
@@ -67,7 +67,7 @@
     transition: opacity 2s ease, transform 2s ease;
   }
   #page1-profile.show img {
-    height: 20vh;
+    height: 18vh;
     border-radius: 50%;
     box-shadow: 0 0 20px 3px rgba(173,216,230,0.7);
   }
@@ -127,8 +127,8 @@
     align-items: center;
   }
   #page4-logo {
-    width: 120px;
-    height: 120px;
+    width: 180px;
+    height: 180px;
     margin-bottom: 10px;
   }
   #page4-email {
@@ -204,8 +204,12 @@
     currentPage = index;
     pages[currentPage].classList.add('active');
 
-    if (currentPage === 0) animatePage1();
-    if (currentPage === 1) animatePage2();
+    if (currentPage === 0) {
+      setTimeout(() => animatePage1(), 50);
+    }
+    if (currentPage === 1) {
+      setTimeout(() => animatePage2(), 50);
+    }
 
     setTimeout(() => { isAnimating = false; }, 2500);
   }
