@@ -127,7 +127,8 @@
   #page3-content {
     z-index: 2;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
     gap: 30px;
     padding: 50px;
     justify-items: center;
@@ -153,6 +154,17 @@
   }
   .folder:hover {
     transform: scale(1.1);
+  }
+  .folder-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: lightblue;
+  }
+  .folder-label {
+    margin-top: 10px;
+    font-size: 1rem;
   }
 
   #page4 {
@@ -201,12 +213,30 @@
 <section id="page3" class="page">
   <div id="page3-bg"></div>
   <div id="page3-content">
-    <a href="aeromodelling.html"><img src="images/logo1.png" alt="Aeromodelling" class="folder" /></a>
-    <a href="environmental-projects.html"><img src="images/logo2.png" alt="Environmental Projects" class="folder" /></a>
-    <a href="photography.html"><img src="images/logo3.png" alt="Math Ain't Mathing" class="folder" /></a>
-    <a href="research-articles.html"><img src="images/logo4.png" alt="Other Fun Stuff" class="folder" /></a>
-    <a href=""math-aint-mathing.html"><img src="images/logo5.png" alt="Photography" class="folder" /></a>
-    <a href="other-fun-stuff.html"><img src="images/logo6.png" alt="Research Articles" class="folder" /></a>
+    <div class="folder-container">
+      <a href="aeromodelling.html"><img src="images/logo1.png" alt="Aeromodelling Projects" class="folder" /></a>
+      <div class="folder-label">Aeromodelling Projects</div>
+    </div>
+    <div class="folder-container">
+      <a href="environmental-projects.html"><img src="images/logo2.png" alt="Environmental Projects" class="folder" /></a>
+      <div class="folder-label">Environmental Projects</div>
+    </div>
+    <div class="folder-container">
+      <a href="photography.html"><img src="images/logo3.png" alt="Photography" class="folder" /></a>
+      <div class="folder-label">Photography</div>
+    </div>
+    <div class="folder-container">
+      <a href="research-articles.html"><img src="images/logo4.png" alt="Articles That Didn't Make ResearchGate" class="folder" /></a>
+      <div class="folder-label">Articles That Didn't Make ResearchGate</div>
+    </div>
+    <div class="folder-container">
+      <a href="math-aint-mathing.html"><img src="images/logo5.png" alt="Math Ain't Mathing" class="folder" /></a>
+      <div class="folder-label">Math Ain't Mathing</div>
+    </div>
+    <div class="folder-container">
+      <a href="other-fun-stuff.html"><img src="images/logo6.png" alt="Other Fun Stuff" class="folder" /></a>
+      <div class="folder-label">Other Fun Stuff</div>
+    </div>
   </div>
 </section>
 
