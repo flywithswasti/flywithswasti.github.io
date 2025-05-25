@@ -1,184 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fly With Me Portfolio</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Swasti Desai</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap');
 
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-    body, html {
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Roboto', sans-serif;
-      background: black;
-      color: lightblue;
-    }
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body, html {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    background: black;
+    color: lightblue;
+  }
 
-    .page {
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      top: 0; left: 0;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-    .page.active {
-      display: flex;
-      flex-direction: column;
-      background-size: cover;
-      background-position: center center;
-    }
+  .page {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0; left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .page.active {
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    background-position: center center;
+  }
 
-    #page1 {
-      background-image: url('images/background1.png');
-      color: lightblue;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    #page1-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    #page1-text {
-      font-family: 'Pacifico', cursive;
-      font-size: 7vw;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 2s ease, transform 2s ease;
-    }
-    #page1-text.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    #page1-profile {
-      margin-top: 20px;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 2s ease, transform 2s ease;
-    }
-    #page1-profile.show img {
-      height: 20vh;
-      border-radius: 50%;
-      box-shadow: 0 0 20px 3px rgba(173,216,230,0.7);
-    }
-    #page1-profile.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  #page1 {
+    background-image: url('images/background1.png');
+    color: lightblue;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #page1-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  #page1-text {
+    font-family: 'Pacifico', cursive;
+    font-size: 7vw;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 2s ease, transform 2s ease;
+  }
+  #page1-text.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #page1-profile {
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 2s ease, transform 2s ease;
+  }
+  #page1-profile.show img {
+    height: 20vh;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 3px rgba(173,216,230,0.7);
+  }
+  #page1-profile.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    #page2 {
-      position: relative;
-      color: lightblue;
-      overflow: hidden;
-      background: transparent;
-    }
-    #page2-bg {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url('images/background2.png') center/cover no-repeat;
-      filter: none;
-      transition: filter 2s ease;
-      z-index: 1;
-    }
-    #page2-bio {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      padding: 40px 20px;
-      font-size: 1.8rem;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 2s ease, transform 2s ease;
-      user-select: text;
-      margin: auto;
-    }
-    #page2.show-blur #page2-bg {
-      filter: blur(4px);
-    }
-    #page2.show-bio #page2-bio {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  #page2 {
+    position: relative;
+    color: lightblue;
+    overflow: hidden;
+    background: transparent;
+  }
+  #page2-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('images/background2.png') center/cover no-repeat;
+    filter: none;
+    transition: filter 2s ease;
+    z-index: 1;
+  }
+  #page2-bio {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 40px 20px;
+    font-size: 1.8rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 2s ease, transform 2s ease;
+    user-select: text;
+    margin: auto;
+  }
+  #page2.show-blur #page2-bg {
+    filter: blur(4px);
+  }
+  #page2.show-bio #page2-bio {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    #page3 {
-      background-color: #000000;
-      color: white;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
-    #page3 h2 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-    #page3 p {
-      max-width: 800px;
-      font-size: 1.5rem;
-      line-height: 1.8;
-      margin-bottom: 40px;
-    }
-    #page3-folders {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 30px;
-      justify-items: center;
-      align-items: center;
-      padding: 0 20px;
-      max-width: 900px;
-      width: 100%;
-    }
-    .folder-link {
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.3s;
-    }
-    .folder-link:hover {
-      transform: scale(1.1);
-    }
-    .folder-img {
-      width: 100px;
-      height: auto;
-    }
+  #page3 {
+    position: relative;
+    background: transparent;
+    overflow: hidden;
+  }
+  #page3-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('images/background3.png') center/cover no-repeat;
+    filter: none;
+    transition: filter 2s ease;
+    z-index: 1;
+  }
+  #page3-content {
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 30px;
+    padding: 50px;
+    justify-items: center;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 2s ease, transform 2s ease;
+  }
+  #page3.show-blur #page3-bg {
+    filter: blur(4px);
+  }
+  #page3.show-content #page3-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .folder {
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .folder:hover {
+    transform: scale(1.1);
+  }
 
-    #page4 {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-image: url('images/background4.png');
-      background-size: cover;
-      background-position: center;
-      color: lightblue;
-    }
-    #page4.active {
-      display: flex;
-    }
-    #page4-logo {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 10px;
-    }
-    #page4-email {
-      font-size: 1.5rem;
-      color: black;
-      font-family: 'Roboto', sans-serif;
-    }
-  </style>
+  #page4 {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('images/background4.png');
+    background-size: cover;
+    background-position: center;
+    color: lightblue;
+  }
+  #page4.active {
+    display: flex;
+  }
+  #page4-logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+  }
+  #page4-email {
+    font-size: 1.5rem;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+  }
+</style>
 </head>
 <body>
 
@@ -194,24 +194,19 @@
 <section id="page2" class="page">
   <div id="page2-bg"></div>
   <div id="page2-bio">
-    <p>
-      This is a sample 150-200 word bio. Replace this with your real bio text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </p>
+    <p>This is a sample 150-200 word bio. Replace this with your real bio text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
   </div>
 </section>
 
 <section id="page3" class="page">
-  <h2>My Work</h2>
-  <p>
-    Explore a collection of my best projects — from creative storytelling and digital artwork to interactive web experiences and thoughtful campaigns. Each piece reflects a unique part of my journey and passion for innovative expression.
-  </p>
-  <div id="page3-folders">
-    <a href="writing.html" class="folder-link"><img src="images/folder1.png" class="folder-img" alt="Writing" /></a>
-    <a href="projects.html" class="folder-link"><img src="images/folder2.png" class="folder-img" alt="Projects" /></a>
-    <a href="art.html" class="folder-link"><img src="images/folder3.png" class="folder-img" alt="Art" /></a>
-    <a href="resume.html" class="folder-link"><img src="images/folder4.png" class="folder-img" alt="Resume" /></a>
-    <a href="skills.html" class="folder-link"><img src="images/folder5.png" class="folder-img" alt="Skills" /></a>
-    <a href="gallery.html" class="folder-link"><img src="images/folder6.png" class="folder-img" alt="Gallery" /></a>
+  <div id="page3-bg"></div>
+  <div id="page3-content">
+    <a href="aeromodelling.html"><img src="images/logo1.png" alt="Aeromodelling" class="folder" /></a>
+    <a href="environmental-projects.html"><img src="images/logo2.png" alt="Environmental Projects" class="folder" /></a>
+    <a href="photography.html"><img src="images/logo3.png" alt="Math Ain't Mathing" class="folder" /></a>
+    <a href="research-articles.html"><img src="images/logo4.png" alt="Other Fun Stuff" class="folder" /></a>
+    <a href=""math-aint-mathing.html"><img src="images/logo5.png" alt="Photography" class="folder" /></a>
+    <a href="other-fun-stuff.html"><img src="images/logo6.png" alt="Research Articles" class="folder" /></a>
   </div>
 </section>
 
@@ -245,11 +240,21 @@
     }, 200);
   }
 
+  function animatePage3() {
+    const page3 = document.getElementById('page3');
+    setTimeout(() => {
+      page3.classList.add('show-blur');
+      page3.classList.add('show-content');
+    }, 200);
+  }
+
   function resetAnimations() {
     document.getElementById('page1-text').classList.remove('show');
     document.getElementById('page1-profile').classList.remove('show');
     const page2 = document.getElementById('page2');
     page2.classList.remove('show-blur', 'show-bio');
+    const page3 = document.getElementById('page3');
+    page3.classList.remove('show-blur', 'show-content');
   }
 
   function showPage(index) {
@@ -264,6 +269,7 @@
 
     if (currentPage === 0) animatePage1();
     if (currentPage === 1) animatePage2();
+    if (currentPage === 2) animatePage3();
 
     setTimeout(() => { isAnimating = false; }, 1200);
   }
