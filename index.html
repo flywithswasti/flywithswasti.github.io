@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Swasti Desai</title>
+<title>Fly With Me Portfolio</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap');
 
@@ -51,7 +51,7 @@
   }
   #page1-text {
     font-family: 'Pacifico', cursive;
-    font-size: 8vw;
+    font-size: 7vw;
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 2s ease, transform 2s ease;
@@ -67,7 +67,7 @@
     transition: opacity 2s ease, transform 2s ease;
   }
   #page1-profile.show img {
-    height: 18vh;
+    height: 20vh;
     border-radius: 50%;
     box-shadow: 0 0 20px 3px rgba(173,216,230,0.7);
   }
@@ -112,23 +112,40 @@
   }
 
   #page3 {
-    background-color: black;
+    background-color: #000000;
     color: white;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    text-align: center;
+    padding: 20px;
+  }
+  #page3 h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  #page3 p {
+    max-width: 800px;
+    font-size: 1.5rem;
+    line-height: 1.8;
   }
 
   #page4 {
-    background-image: url('images/background4.png');
+    display: none;
     flex-direction: column;
-    color: lightblue;
     justify-content: center;
     align-items: center;
+    background-image: url('images/background4.png');
+    background-size: cover;
+    background-position: center;
+    color: lightblue;
+  }
+  #page4.active {
+    display: flex;
   }
   #page4-logo {
-    width: 180px;
-    height: 180px;
+    width: 120px;
+    height: 120px;
     margin-bottom: 10px;
   }
   #page4-email {
@@ -159,7 +176,10 @@
 </section>
 
 <section id="page3" class="page">
-  <div>Page 3 Coming Soon...</div>
+  <h2>My Work</h2>
+  <p>
+    Explore a collection of my best projects — from creative storytelling and digital artwork to interactive web experiences and thoughtful campaigns. Each piece reflects a unique part of my journey and passion for innovative expression.
+  </p>
 </section>
 
 <section id="page4" class="page">
@@ -178,14 +198,18 @@
   let isAnimating = false;
 
   function animatePage1() {
-    document.getElementById('page1-text').classList.add('show');
-    document.getElementById('page1-profile').classList.add('show');
+    const text = document.getElementById('page1-text');
+    const profile = document.getElementById('page1-profile');
+    text.classList.add('show');
+    profile.classList.add('show');
   }
 
   function animatePage2() {
     const page2 = document.getElementById('page2');
-    page2.classList.remove('show-blur', 'show-bio');
-    setTimeout(() => page2.classList.add('show-blur', 'show-bio'), 2000);
+    setTimeout(() => {
+      page2.classList.add('show-blur');
+      page2.classList.add('show-bio');
+    }, 200);
   }
 
   function resetAnimations() {
@@ -201,17 +225,14 @@
 
     pages[currentPage].classList.remove('active');
     resetAnimations();
+
     currentPage = index;
     pages[currentPage].classList.add('active');
 
-    if (currentPage === 0) {
-      setTimeout(() => animatePage1(), 50);
-    }
-    if (currentPage === 1) {
-      setTimeout(() => animatePage2(), 50);
-    }
+    if (currentPage === 0) animatePage1();
+    if (currentPage === 1) animatePage2();
 
-    setTimeout(() => { isAnimating = false; }, 2500);
+    setTimeout(() => { isAnimating = false; }, 1200);
   }
 
   window.addEventListener('wheel', (event) => {
