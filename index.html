@@ -62,7 +62,7 @@
     transition: opacity 2s ease, transform 2s ease;
   }
   #page1-profile.show img {
-    max-height: 90%;
+    max-height: 50vh;
     border-radius: 50%;
     box-shadow: 0 0 20px 3px rgba(173,216,230,0.7);
   }
@@ -106,6 +106,14 @@
     transform: translateY(0);
   }
 
+  #page3 {
+    background-color: black;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+  }
+
   #page4 {
     background-image: url('images/background4.png');
     flex-direction: column;
@@ -143,6 +151,10 @@
   </div>
 </section>
 
+<section id="page3" class="page">
+  <div>Page 3 Coming Soon...</div>
+</section>
+
 <section id="page4" class="page">
   <img id="page4-logo" src="images/logo7.png" alt="Mail Emoji" />
   <div id="page4-email">swasti.desai.225@gmail.com</div>
@@ -152,6 +164,7 @@
   const pages = [
     document.getElementById('page1'),
     document.getElementById('page2'),
+    document.getElementById('page3'),
     document.getElementById('page4'),
   ];
   let currentPage = 0;
@@ -165,7 +178,7 @@
   function animatePage2() {
     const page2 = document.getElementById('page2');
     page2.classList.remove('show-blur', 'show-bio');
-    setTimeout(() => page2.classList.add('show-blur', 'show-bio'), 2500);
+    setTimeout(() => page2.classList.add('show-blur', 'show-bio'), 2000);
   }
 
   function resetAnimations() {
