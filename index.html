@@ -7,7 +7,6 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap');
 
-  /* Reset and base */
   * {
     margin: 0; padding: 0; box-sizing: border-box;
   }
@@ -19,7 +18,6 @@
     color: lightblue;
   }
 
-  /* Container for all pages */
   .page {
     position: fixed;
     width: 100vw;
@@ -37,7 +35,6 @@
     background-position: center center;
   }
 
-  /* PAGE 1 */
   #page1 {
     background-image: url('images/background1.png');
     color: lightblue;
@@ -74,7 +71,6 @@
     transform: translateY(0);
   }
 
-  /* PAGE 2 */
   #page2 {
     position: relative;
     color: lightblue;
@@ -102,12 +98,14 @@
     user-select: text;
     margin: auto;
   }
-  #page2-bio.show {
+  #page2.show-blur #page2-bg {
+    filter: blur(4px);
+  }
+  #page2.show-bio #page2-bio {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* PAGE 4 */
   #page4 {
     background-image: url('images/background4.png');
     flex-direction: column;
@@ -129,7 +127,6 @@
 </head>
 <body>
 
-<!-- PAGE 1 -->
 <section id="page1" class="page active">
   <div id="page1-text">Fly With Me</div>
   <div id="page1-profile">
@@ -137,24 +134,21 @@
   </div>
 </section>
 
-<!-- PAGE 2 -->
 <section id="page2" class="page">
   <div id="page2-bg"></div>
   <div id="page2-bio">
     <p>
-      This is a sample 150-200 word bio. Replace this with your real bio text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      This is a sample 150-200 word bio. Replace this with your real bio text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </p>
   </div>
 </section>
 
-<!-- PAGE 4 -->
 <section id="page4" class="page">
   <img id="page4-logo" src="images/logo7.png" alt="Mail Emoji" />
   <div id="page4-email">swasti.desai.225@gmail.com</div>
 </section>
 
 <script>
-  // Pages array and current page index
   const pages = [
     document.getElementById('page1'),
     document.getElementById('page2'),
@@ -163,89 +157,48 @@
   let currentPage = 0;
   let isAnimating = false;
 
-  // Animations for page 1
   function animatePage1() {
-    const p1Text = document.getElementById('page1-text');
-    const p1Profile = document.getElementById('page1-profile');
-
-    p1Text.classList.remove('show');
-    p1Profile.classList.remove('show');
-
-    setTimeout(() => p1Text.classList.add('show'), 300);
-    setTimeout(() => p1Profile.classList.add('show'), 1200);
+    document.getElementById('page1-text').classList.add('show');
+    document.getElementById('page1-profile').classList.add('show');
   }
 
-  // Animations for page 2
   function animatePage2() {
-    const page2Bg = document.getElementById('page2-bg');
-    const p2Bio = document.getElementById('page2-bio');
-
-    page2Bg.style.filter = 'none';
-    p2Bio.classList.remove('show');
-
-    setTimeout(() => {
-      page2Bg.style.filter = 'blur(4px)';
-      p2Bio.classList.add('show');
-    }, 2500);
+    const page2 = document.getElementById('page2');
+    page2.classList.remove('show-blur', 'show-bio');
+    setTimeout(() => page2.classList.add('show-blur', 'show-bio'), 2500);
   }
 
-  // No animation for page 4 needed
-
-  // Reset animations on all pages
   function resetAnimations() {
-    // Page 1
     document.getElementById('page1-text').classList.remove('show');
     document.getElementById('page1-profile').classList.remove('show');
-
-    // Page 2
-    document.getElementById('page2-bg').style.filter = 'none';
-    document.getElementById('page2-bio').classList.remove('show');
+    const page2 = document.getElementById('page2');
+    page2.classList.remove('show-blur', 'show-bio');
   }
 
-  // Show page function with instant jump and cooldown
   function showPage(index) {
-    if (index < 0 || index >= pages.length) return;
-    if (isAnimating) return;
+    if (index < 0 || index >= pages.length || isAnimating) return;
     isAnimating = true;
 
     pages[currentPage].classList.remove('active');
+    resetAnimations();
     currentPage = index;
     pages[currentPage].classList.add('active');
 
-    resetAnimations();
+    if (currentPage === 0) animatePage1();
+    if (currentPage === 1) animatePage2();
 
-    if (currentPage === 0) {
-      animatePage1();
-    } else if (currentPage === 1) {
-      animatePage2();
-    } else if (currentPage === 2) {
-      // page 4 no animation
-    }
-
-    setTimeout(() => {
-      isAnimating = false;
-    }, 2500); // 2.5 seconds cooldown
+    setTimeout(() => { isAnimating = false; }, 2500);
   }
 
-  // Handle scroll wheel event for page navigation
   window.addEventListener('wheel', (event) => {
-    if (event.deltaY > 0) {
-      // Scroll down
-      if (currentPage < pages.length - 1) {
-        showPage(currentPage + 1);
-      }
-    } else if (event.deltaY < 0) {
-      // Scroll up
-      if (currentPage > 0) {
-        showPage(currentPage - 1);
-      }
+    if (event.deltaY > 0 && currentPage < pages.length - 1) {
+      showPage(currentPage + 1);
+    } else if (event.deltaY < 0 && currentPage > 0) {
+      showPage(currentPage - 1);
     }
   });
 
-  // Initial animation on load for page 1
-  window.onload = () => {
-    animatePage1();
-  };
+  window.onload = () => animatePage1();
 </script>
 
 </body>
