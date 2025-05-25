@@ -7,188 +7,263 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap');
 
-  /* Reset */
+  /* Reset & base */
   * {
     margin: 0; padding: 0; box-sizing: border-box;
   }
   html, body {
     height: 100%;
-    scroll-behavior: smooth;
+    overflow: hidden; /* disable default scroll */
     font-family: 'Roboto', sans-serif;
+    background: #000;
+    color: lightblue;
   }
-  body {
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-  }
-
-  section {
-    position: relative;
-    height: 100vh;
-    width: 100vw;
-    scroll-snap-align: start;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #a3d2ca; /* light blue */
-  }
-
-  /* Background container with separate image and blur */
-  .bg-container {
+  .page {
     position: absolute;
-    top:0; left:0; right:0; bottom:0;
-    background-size: cover;
-    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    top: 0; left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .page.active {
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+  }
+
+  /* Background images */
+  #page1 {
+    background: url('images/background1.png') center/cover no-repeat;
+  }
+  #page2 {
+    background: url('images/background2.png') center/cover no-repeat;
     filter: none;
     transition: filter 1s ease;
-    z-index: -2;
-  }
-  .bg-blur {
-    filter: blur(6px);
-  }
-
-  /* Overlay layer to dim background for better text visibility */
-  .overlay {
-    position: absolute;
-    top:0; left:0; right:0; bottom:0;
-    background-color: rgba(0,0,0,0.35);
-    z-index: -1;
-  }
-
-  /* PAGE 1 styles */
-  #page1 {
-    flex-direction: column;
-  }
-  #page1 h1 {
-    font-family: 'Pacifico', cursive;
-    font-size: 7vw;
-    color: #9ad3bc; /* light medium green-blue */
-    margin-bottom: 2rem;
-    transform: translateY(100%);
-    opacity: 0;
-    transition: transform 1s ease, opacity 1s ease;
-  }
-  #page1 h1.visible {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  #page1 img {
-    width: 40vw;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    transform: translateY(100%);
-    opacity: 0;
-    transition: transform 1s ease 0.3s, opacity 1s ease 0.3s;
-  }
-  #page1 img.visible {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  /* PAGE 2 styles */
-  #page2 {
-    padding: 2rem;
-    font-size: 1.3rem;
+    padding: 0 20px;
     text-align: center;
-    line-height: 1.6;
-    max-width: 700px;
-    margin: 0 auto;
-    opacity: 0;
-    transform: translateY(100%);
-    transition: transform 1s ease, opacity 1s ease;
   }
-  #page2.visible {
+  #page4 {
+    background: url('images/background4.png') center/cover no-repeat;
+    color: lightblue;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  /* Page 1 text and profile container */
+  #page1-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: lightblue;
+  }
+  #page1-text {
+    font-family: 'Pacifico', cursive;
+    font-size: 6vw;
+    line-height: 1.2;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  #page1-text.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #page1-profile {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+  }
+  #page1-profile.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #page1-profile img {
+    border-radius: 50%;
+    width: 30vmin;
+    height: 30vmin;
+    object-fit: cover;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  }
+
+  /* Page 2 bio text */
+  #page2-bio {
+    max-width: 800px;
+    font-size: 1.8rem;
+    color: lightblue;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  #page2-bio.show {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* PAGE 4 styles */
-  #page4 {
-    flex-direction: column;
+  /* Page 4 mail emoji and email */
+  #page4-content {
+    text-align: center;
   }
-  #page4 img {
+  #page4-content img {
     width: 80px;
-    margin-bottom: 1rem;
+    margin-bottom: 15px;
   }
-  #page4 p {
-    font-size: 1.3rem;
-    color: #9ad3bc;
+  #page4-content p {
+    font-size: 1.8rem;
+    color: lightblue;
   }
-
 </style>
 </head>
 <body>
 
 <!-- PAGE 1 -->
-<section id="page1">
-  <div class="bg-container" id="bg1" style="background-image: url('images/background1.png');"></div>
-  <div class="overlay"></div>
-  <h1>Fly With Me</h1>
-  <img src="images/profile.jpg" alt="Profile Photo" />
+<section id="page1" class="page active">
+  <div id="page1-content">
+    <div id="page1-text">Fly With Me</div>
+    <div id="page1-profile"><img src="images/profile.jpg" alt="Profile Photo" /></div>
+  </div>
 </section>
 
 <!-- PAGE 2 -->
-<section id="page2">
-  <div class="bg-container" id="bg2" style="background-image: url('images/background2.png');"></div>
-  <div class="overlay"></div>
-  <p>
-    <!-- Replace with your 150-200 word bio -->
-    Hi, I am Swasti, an aerospace enthusiast and explorer. This site showcases my journey through flight, nature, and creativity. Join me as I share projects, photos, and stories inspired by the sky and beyond.
-  </p>
+<section id="page2" class="page">
+  <div id="page2-bio">
+    <p>
+      This is a sample 150-200 word bio. Replace this with your real bio text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+  </div>
+</section>
+
+<!-- PAGE 3 -->
+<section id="page3" class="page">
+  <!-- Placeholder for now -->
+  <h2 style="color: lightblue;">Page 3 - Folders coming soon</h2>
 </section>
 
 <!-- PAGE 4 -->
-<section id="page4">
-  <div class="bg-container" id="bg4" style="background-image: url('images/background4.png');"></div>
-  <div class="overlay"></div>
-  <img src="images/logo7.png" alt="Email Icon" />
-  <p>swasti.desai.225@gmail.com</p>
+<section id="page4" class="page">
+  <div id="page4-content">
+    <img src="images/logo7.png" alt="Mail Emoji" />
+    <p>swasti.desai.225@gmail.com</p>
+  </div>
 </section>
 
 <script>
-  // Intersection Observer to trigger blur + animation when page visible
+  const pages = [...document.querySelectorAll('.page')];
+  let currentPage = 0;
+  let isAnimating = false;
 
-  const options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.7  // 70% of section must be visible to activate
-  };
+  function showPage(index) {
+    if (index < 0 || index >= pages.length) return;
+    if (isAnimating) return;
+    isAnimating = true;
 
-  function onIntersect(entries) {
-    entries.forEach(entry => {
-      const section = entry.target;
-      const bg = section.querySelector('.bg-container');
-      if(entry.isIntersecting) {
-        // Blur background after short delay
-        setTimeout(() => {
-          bg.classList.add('bg-blur');
-        }, 500);
+    // Hide current
+    pages[currentPage].classList.remove('active');
 
-        // Animate text/photo depending on page
-        if(section.id === 'page1') {
-          section.querySelector('h1').classList.add('visible');
-          section.querySelector('img').classList.add('visible');
-        } else if(section.id === 'page2') {
-          section.querySelector('p').classList.add('visible');
-        }
-      } else {
-        // Remove blur and animation when not visible
-        bg.classList.remove('bg-blur');
-        if(section.id === 'page1') {
-          section.querySelector('h1').classList.remove('visible');
-          section.querySelector('img').classList.remove('visible');
-        } else if(section.id === 'page2') {
-          section.querySelector('p').classList.remove('visible');
-        }
-      }
-    });
+    currentPage = index;
+
+    // Show new page
+    pages[currentPage].classList.add('active');
+
+    // Reset animations on all pages
+    resetAnimations();
+
+    // Run animations depending on page
+    if (currentPage === 0) {
+      animatePage1();
+    } else if (currentPage === 1) {
+      animatePage2();
+    } else if (currentPage === 3) {
+      // No blur or animation for page 4, just show
+    }
+
+    // Allow next animation after 1.5s
+    setTimeout(() => {
+      isAnimating = false;
+    }, 1500);
   }
 
-  const observer = new IntersectionObserver(onIntersect, options);
-  document.querySelectorAll('section').forEach(section => {
-    observer.observe(section);
-  });
+  // Reset animation classes and styles
+  function resetAnimations() {
+    // Page 1
+    const p1Text = document.getElementById('page1-text');
+    const p1Profile = document.getElementById('page1-profile');
+    p1Text.classList.remove('show');
+    p1Profile.classList.remove('show');
+
+    // Page 2
+    const page2 = document.getElementById('page2');
+    const p2Bio = document.getElementById('page2-bio');
+    p2Bio.classList.remove('show');
+    page2.style.filter = 'none';
+  }
+
+  // Animate Page 1: text and profile roll in from bottom
+  function animatePage1() {
+    const p1Text = document.getElementById('page1-text');
+    const p1Profile = document.getElementById('page1-profile');
+
+    // slight delay for profile
+    setTimeout(() => p1Text.classList.add('show'), 100);
+    setTimeout(() => p1Profile.classList.add('show'), 600);
+  }
+
+  // Animate Page 2: crisp background for 2s, then blur + roll in bio text
+  function animatePage2() {
+    const page2 = document.getElementById('page2');
+    const p2Bio = document.getElementById('page2-bio');
+
+    // Show crisp background and hide bio text initially
+    page2.style.filter = 'none';
+    p2Bio.classList.remove('show');
+
+    // After 2 seconds, blur background and show bio text
+    setTimeout(() => {
+      page2.style.transition = 'filter 1s ease';
+      page2.style.filter = 'blur(4px)';
+      p2Bio.classList.add('show');
+    }, 2000);
+  }
+
+  // On page load, animate page 1
+  window.onload = () => {
+    animatePage1();
+  };
+
+  // Scroll wheel event to switch pages instantly
+  window.addEventListener('wheel', (e) => {
+    if (isAnimating) return;
+
+    if (e.deltaY > 0) {
+      // Scroll down
+      if (currentPage < pages.length - 1) {
+        showPage(currentPage + 1);
+      }
+    } else if (e.deltaY < 0) {
+      // Scroll up
+      if (currentPage > 0) {
+        showPage(currentPage - 1);
+      }
+    }
+  }, { passive: true });
+
 </script>
 
 </body>
